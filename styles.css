@@ -1,0 +1,847 @@
+/* =================================================================
+   FEUILLE DE STYLE — PIERRE David
+   -----------------------------------------------------------------
+   Sommaire :
+   1. Variables globales
+   2. Réinitialisation & base
+   3. Bandeau défilant (ticker)
+   4. Navigation
+   5. Section intro + planche crème (SPen)
+   6. Styles de sections génériques
+   7. Section "À propos"
+   8. Section médias
+   9. Section documents / mémoire
+  10. Section contact
+  11. Pied de page
+  12. Animations au défilement
+  13. Responsive
+   ================================================================= */
+
+/* =================================================================
+   1. VARIABLES GLOBALES (couleurs, polices, ombres)
+   ================================================================= */
+:root{
+  --cream:        #faf3e6;   /* fond crème général */
+  --cream-soft:   #f4ead7;
+  --paper:        #fffdf7;   /* fond des cartes */
+  --ink:          #231f2e;   /* texte principal */
+  --ink-2:        #5b5468;   /* texte secondaire */
+  --blue:         #1f6bff;   /* bleu "encre du SPen" */
+  --violet:       #c42a8c;   /* lueur rouge-violet */
+  --line:         rgba(35,31,46,.12);
+
+  --radius:       20px;
+  --shadow-s:     0 10px 25px -18px rgba(35,25,55,.55);
+  --shadow-m:     0 26px 50px -30px rgba(35,25,55,.60);
+
+  --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-title:   'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-hand:    'Caveat', 'Segoe Script', 'Comic Sans MS', cursive;
+  --font-sign:    'Great Vibes', 'Brush Script MT', cursive;
+}
+
+/* =================================================================
+   2. RÉINITIALISATION & BASE
+   ================================================================= */
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background-color: var(--cream);
+  /* Léger halo coloré en fond de page (bleu + rouge-violet) */
+  background-image:
+    radial-gradient(1100px 550px at 8% -10%, rgba(31,107,255,.07), transparent 60%),
+    radial-gradient(900px 500px at 108% 8%,  rgba(196,42,140,.07), transparent 60%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img{ max-width: 100%; display: block; }
+
+/* Conteneur centré responsive */
+.container{
+  width: min(1120px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* Décalage pour la navigation collante lors des ancres */
+section[id]{ scroll-margin-top: 84px; }
+
+/* =================================================================
+   3. BANDEAU DÉFILANT (TICKER)
+   ================================================================= */
+.ticker{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #151220 0%, #241a35 45%, #151220 100%);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  color: #f6ecd9;
+  z-index: 110;
+}
+
+.ticker__track{
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 28s linear infinite;
+  will-change: transform;
+}
+.ticker:hover .ticker__track,
+.ticker:focus-within .ticker__track{ animation-play-state: paused; }
+
+@keyframes tickerScroll{
+  from{ transform: translateX(0); }
+  to  { transform: translateX(-50%); }   /* -50% = une copie exacte du contenu */
+}
+
+.ticker__item{
+  display: inline-flex;
+  align-items: center;
+  padding: .68rem 2.5rem .68rem 0;
+  font-size: clamp(.82rem, 1.6vw, 1rem);
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+/* --- Nom "PIERRE David" stylisé de façon calligraphique --- */
+.signature{
+  font-family: var(--font-sign);
+  font-size: 1.85em;
+  line-height: 1;
+  padding: 0 .18em;
+  letter-spacing: .01em;
+  background: linear-gradient(95deg, #8fc0ff 0%, #ffa8e0 35%, #ffd9a8 60%, #8fc0ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 9px rgba(255,120,200,.45));
+}
+
+/* =================================================================
+   4. NAVIGATION
+   ================================================================= */
+.nav{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,243,230,.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav__inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 58px;
+  padding: .4rem 0;
+}
+.nav__brand{
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav__brand span{
+  font-family: var(--font-sign);
+  font-size: 1.55em;
+  color: var(--blue);
+  margin-left: .1em;
+}
+.nav__links{
+  display: flex;
+  gap: .25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.nav__links::-webkit-scrollbar{ display: none; }
+.nav__links a{
+  display: inline-block;
+  padding: .45rem .85rem;
+  border-radius: 999px;
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .25s, background .25s;
+}
+.nav__links a:hover{ color: var(--ink); background: rgba(31,107,255,.10); }
+
+/* =================================================================
+   5. SECTION INTRO + PLANCHE CRÈME (effet SPen)
+   ================================================================= */
+.intro{ padding: clamp(34px, 6vw, 72px) 0 clamp(40px, 7vw, 84px); }
+
+.kicker{
+  display: inline-block;
+  margin: 0 0 .5rem;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.intro__title{
+  font-family: var(--font-title);
+  font-size: clamp(2.1rem, 6vw, 3.9rem);
+  line-height: 1.06;
+  letter-spacing: -.015em;
+  margin: .1em 0 .25em;
+}
+.intro__title em{
+  font-family: var(--font-sign);
+  font-style: normal;
+  font-size: 1.2em;
+  padding-left: .08em;
+  background: linear-gradient(100deg, #1f6bff, #c42a8c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro__sub{
+  margin: 0 0 clamp(26px, 4vw, 44px);
+  max-width: 60ch;
+  color: var(--ink-2);
+  font-size: clamp(.95rem, 1.8vw, 1.06rem);
+}
+
+/* ---------- La "planche crème" (texture bois clair + relief) ---------- */
+.plank{
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: clamp(22px, 4.2vw, 46px);
+  border: 1px solid rgba(146,108,60,.30);
+  background-color: #f6ead2;
+  background-image:
+    /* veines du bois (fines lignes verticales légèrement inclinées) */
+    repeating-linear-gradient(96deg, rgba(150,110,60,.055) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(88deg, rgba(150,110,60,.040) 0 1px, transparent 1px 17px),
+    repeating-linear-gradient(91deg, rgba(255,255,255,.50) 0 1px, transparent 1px 27px),
+    /* relief général de la planche */
+    linear-gradient(160deg, #fcf2df 0%, #f3e5c9 48%, #ecdcbb 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.90),          /* arête supérieure éclairée */
+    inset 0 -16px 28px -14px rgba(120,84,40,.35), /* ombre interne basse */
+    inset 0 16px 28px -20px rgba(255,255,255,.95),
+    0 28px 55px -30px rgba(70,48,20,.55);         /* ombre portée */
+}
+
+/* Petit nœud de bois décoratif + vignettage doux */
+.plank::before{
+  content: "";
+  position: absolute;
+  right: -40px; bottom: -60px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(150,110,60,.16), transparent 62%);
+  pointer-events: none;
+}
+.plank::after{
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 90px rgba(140,105,60,.12);
+  pointer-events: none;
+}
+
+.plank__label{
+  position: relative;
+  z-index: 1;
+  margin: 0 0 clamp(14px, 2.5vw, 24px);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #8a6a3f;
+}
+
+.plank__lines{
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(8px, 1.6vw, 14px);
+}
+
+/* Lignes écrites "au SPen" */
+.typed-line{
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: clamp(1.25rem, 3.1vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.35;
+  min-height: 1.35em;
+  color: #8a6a3f;          /* couleur de secours si JS désactivé */
+  overflow-wrap: anywhere;
+}
+
+/* Le texte tracé : bleu + lueur rouge-violet */
+.typed{
+  color: #1f6bff;
+  text-shadow:
+    0 0 1px rgba(31,107,255,.95),
+    0 0 9px rgba(31,107,255,.38),
+    0 0 18px rgba(196,42,140,.32),
+    0 0 34px rgba(196,42,140,.18);
+}
+
+/* Le curseur "Plume Or" */
+.pen-cursor {
+  display: inline-block;
+  width: 4px;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: -.18em;
+  border-radius: 2px 2px 50% 50%;
+  background: linear-gradient(180deg, #564903 0%, #b8860b 100%);
+  /* Dégradé Or */
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
+  /* Lueur dorée */
+  animation: penBlink 1.05s steps(1, end) infinite;
+}
+@keyframes penBlink{
+  0%, 55%   { opacity: 1; }
+  56%, 100% { opacity: .06; }
+}
+
+/* =================================================================
+   6. STYLES DE SECTIONS GÉNÉRIQUES
+   ================================================================= */
+.section{ padding: clamp(48px, 8vw, 96px) 0; }
+
+.section__head{ margin-bottom: clamp(24px, 4vw, 42px); }
+.section__head h2{
+  font-family: var(--font-title);
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  margin: .1em 0 .3em;
+}
+.section__head p{
+  margin: 0;
+  max-width: 62ch;
+  color: var(--ink-2);
+}
+
+/* Carte générique */
+.card{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: var(--shadow-s);
+}
+
+/* Boutons */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .74rem 1.3rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .25s, background .25s, color .25s;
+}
+.btn--primary{
+  background: linear-gradient(100deg, #1f6bff, #7a3bff);
+  color: #fff;
+  box-shadow: 0 14px 30px -14px rgba(31,107,255,.75);
+}
+.btn--primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 20px 36px -14px rgba(31,107,255,.85);
+}
+.btn--ghost{
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn--ghost:hover{
+  background: rgba(35,31,46,.05);
+  transform: translateY(-2px);
+}
+
+/* =================================================================
+   7. SECTION "À PROPOS"
+   ================================================================= */
+.about{
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: clamp(22px, 4vw, 46px);
+  align-items: start;
+}
+
+.about__photo{
+  margin: 0;
+  background: linear-gradient(160deg, #f7ecd6, #e6d2ad);
+  border: 1px solid rgba(146,108,60,.28);
+  border-radius: var(--radius);
+  padding: 12px;
+  box-shadow: var(--shadow-m);
+}
+.about__photo img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #efe3c8;
+}
+.about__photo figcaption{
+  padding: .7rem .35rem .25rem;
+  font-size: .82rem;
+  text-align: center;
+  color: #8a6a3f;
+  letter-spacing: .02em;
+}
+
+.about__text p{ margin-top: 0; color: var(--ink-2); }
+.about__text strong{ color: var(--ink); }
+
+.facts{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.facts li{
+  padding: .38rem .85rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: #2a4a86;
+  background: rgba(31,107,255,.10);
+  border: 1px solid rgba(31,107,255,.18);
+}
+
+/* ---------- Compétences techniques ---------- */
+.skills{
+  margin-top: clamp(30px, 5vw, 54px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+}
+.skills__title{
+  grid-column: 1 / -1;
+  font-family: var(--font-title);
+  font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+  margin: 0 0 .2rem;
+}
+
+.skill{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.05rem 1.15rem;
+  box-shadow: var(--shadow-s);
+}
+.skill__top{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: .92rem;
+  font-weight: 600;
+  margin-bottom: .55rem;
+}
+.skill__top span:last-child{
+  font-size: .82rem;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.skill__bar{
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(35,31,46,.09);
+  overflow: hidden;
+}
+.skill__bar i{
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #1f6bff, #c42a8c);
+  box-shadow: 0 0 12px rgba(196,42,140,.35);
+  transition: width 1.25s cubic-bezier(.22,.9,.25,1);
+}
+/* Remplissage déclenché à l'apparition (classe .is-visible ajoutée en JS) */
+.skill.is-visible .skill__bar i{ width: var(--v); }
+
+/* Badges de compétences complémentaires */
+.badges{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1.6rem;
+}
+.badges span{
+  padding: .4rem .9rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+/* =================================================================
+   8. SECTION MÉDIAS
+   ================================================================= */
+.media-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
+}
+.media-grid h3{
+  margin: 0 0 .9rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.media-grid h3::before{
+  content: "";
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1f6bff, #c42a8c);
+  box-shadow: 0 0 10px rgba(196,42,140,.5);
+}
+
+.media-grid audio,
+.media-grid video{
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+  background: #1a1726;
+}
+.media-grid video{ aspect-ratio: 16 / 9; object-fit: cover; }
+
+.hint{
+  margin: .8rem 0 0;
+  font-size: .8rem;
+  color: var(--ink-2);
+}
+
+/* Galerie photos */
+.gallery{
+  margin-top: clamp(18px, 3vw, 28px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(12px, 2vw, 18px);
+}
+.gallery figure{
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-s);
+  background: #efe3c8;
+}
+.gallery img{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.gallery figure:hover img{ transform: scale(1.05); }
+
+/* =================================================================
+   9. SECTION DOCUMENTS / MÉMOIRE
+   ================================================================= */
+.thesis{
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: clamp(22px, 4vw, 40px);
+  border: 1px solid rgba(31,107,255,.22);
+  background:
+    radial-gradient(700px 300px at 100% 0%, rgba(196,42,140,.10), transparent 65%),
+    radial-gradient(700px 300px at 0% 100%, rgba(31,107,255,.12), transparent 65%),
+    var(--paper);
+  box-shadow: var(--shadow-m);
+}
+.thesis__badge{
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .32rem .8rem;
+  border-radius: 999px;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #8c1f66;
+  background: rgba(196,42,140,.10);
+  border: 1px solid rgba(196,42,140,.25);
+}
+.thesis__badge::before{
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #c42a8c;
+  box-shadow: 0 0 8px rgba(196,42,140,.8);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%, 100%{ transform: scale(1);   opacity: 1; }
+  50%     { transform: scale(1.5); opacity: .45; }
+}
+
+.thesis h3{
+  font-family: var(--font-title);
+  font-size: clamp(1.3rem, 3vw, 1.85rem);
+  margin: .9rem 0 .5rem;
+  line-height: 1.2;
+}
+.thesis p{ margin: 0 0 1.4rem; color: var(--ink-2); max-width: 62ch; }
+.thesis__actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+}
+
+/* Liste d'autres documents */
+.doc-list{
+  margin-top: clamp(18px, 3vw, 28px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(14px, 2vw, 20px);
+}
+.doc-list a{
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: 1rem 1.15rem;
+  border-radius: 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-s);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .92rem;
+  transition: transform .2s, box-shadow .25s, border-color .25s;
+}
+.doc-list a:hover{
+  transform: translateY(-3px);
+  border-color: rgba(31,107,255,.3);
+  box-shadow: 0 18px 34px -22px rgba(35,25,55,.65);
+}
+.doc-list a span{
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  display: block;
+}
+.doc-list .ico{
+  flex: 0 0 auto;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: rgba(31,107,255,.10);
+  color: #1f6bff;
+  font-size: 1rem;
+}
+
+/* =================================================================
+   10. SECTION CONTACT
+   ================================================================= */
+.contact{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(20px, 4vw, 40px);
+  align-items: start;
+}
+
+.contact-list{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .75rem;
+}
+.contact-list li{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: .9rem 1.1rem;
+  box-shadow: var(--shadow-s);
+}
+.contact-list .label{
+  display: block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: .2rem;
+}
+.contact-list a{
+  color: var(--ink);
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color .25s;
+}
+.contact-list a:hover{ color: var(--blue); }
+
+/* Formulaire */
+.form{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(18px, 3vw, 30px);
+  box-shadow: var(--shadow-m);
+}
+.field{ margin-bottom: 1rem; }
+.field label{
+  display: block;
+  font-size: .82rem;
+  font-weight: 600;
+  margin-bottom: .35rem;
+  color: var(--ink-2);
+}
+.field input,
+.field textarea{
+  width: 100%;
+  padding: .75rem .95rem;
+  font: inherit;
+  font-size: .93rem;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+.field textarea{ resize: vertical; min-height: 130px; }
+.field input:focus,
+.field textarea:focus{
+  outline: none;
+  background: #fff;
+  border-color: rgba(31,107,255,.55);
+  box-shadow: 0 0 0 4px rgba(31,107,255,.13);
+}
+.form__status{
+  margin: .9rem 0 0;
+  font-size: .84rem;
+  color: #1f6bff;
+  min-height: 1.2em;
+}
+
+/* =================================================================
+   11. PIED DE PAGE
+   ================================================================= */
+.footer{
+  border-top: 1px solid var(--line);
+  padding: 2rem 0 2.4rem;
+  text-align: center;
+  font-size: .84rem;
+  color: var(--ink-2);
+}
+.footer strong{ color: var(--ink); }
+.footer .signature{ font-size: 1.3em; }
+
+.footer {
+  position: relative;
+}
+
+.footer .container::after {
+  content: "";
+  display: block;
+  width: min(240px, 55%);
+  height: 1.5px;
+  margin: 10px auto 0;
+  background: currentColor;
+  opacity: 0.35;
+  transform: scaleX(0.25);
+  transform-origin: center;
+  animation: footerLinePulse 5s ease-in-out infinite alternate;
+}
+
+@keyframes footerLinePulse {
+  0% {
+    transform: scaleX(0.25);
+    opacity: 0.25;
+  }
+
+  100% {
+    transform: scaleX(1);
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer .container::after {
+    animation: none;
+    transform: scaleX(0.7);
+    opacity: 0.35;
+  }
+}
+/* =================================================================
+   12. ANIMATIONS D'APPARITION AU DÉFILEMENT
+   ================================================================= */
+.reveal{
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .75s ease, transform .75s cubic-bezier(.22,.9,.25,1);
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: none;
+}
+
+/* =================================================================
+   13. RESPONSIVE
+   ================================================================= */
+@media (max-width: 900px){
+  .about,
+  .contact{
+    grid-template-columns: 1fr;   /* on empile photo / texte et contact / formulaire */
+  }
+  .about__photo{ max-width: 380px; }
+}
+
+@media (max-width: 640px){
+  .nav__brand{ font-size: .95rem; }
+  .nav__links a{ padding: .42rem .7rem; font-size: .84rem; }
+  .plank{ border-radius: 18px; }
+  .ticker__item{ padding-right: 1.6rem; }
+}
+
+/* Respect des préférences d'accessibilité */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .ticker__track{ animation: none; }
+  .pen-cursor{ animation: none; }
+  .reveal{ opacity: 1; transform: none; transition: none; }
+  .skill__bar i{ transition: none; }
+  .thesis__badge::before{ animation: none; }
+}

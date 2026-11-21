@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PIERRE David — Étudiant mémorand FAMV/UEH (PDA)</title>
+  <meta name="description"
+    content="Site personnel de PIERRE David, étudiant mémorand à la Faculté d'Agronomie et de Médecine Vétérinaire (FAMV/UEH), spécialité Production Animale (PDA).">
+
+  <!-- ===================== POLICES GOOGLE FONTS ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ===================== FEUILLE DE STYLE ========================= -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Filet de sécurité si JavaScript est désactivé -->
+  <noscript>
+    <style>
+      #typed-1::after {
+        content: "FAMV — Faculté d'Agronomie et de Médecine Vétérinaire";
+      }
+
+      #typed-2::after {
+        content: "UEH — Université d'État d'Haïti";
+      }
+
+      #typed-3::after {
+        content: "PDA — Production Animale";
+      }
+    </style>
+  </noscript>
+</head>
+
+<body>
+
+  <!-- =================================================================
+     A. BANDEAU DÉFILANT (TICKER)
+     ================================================================= -->
+  <div class="ticker" role="region" aria-label="Bandeau d'information">
+    <div class="ticker__track">
+      <!-- Copie 1 -->
+      <span class="ticker__item">
+        Bienvenue sur le site de&nbsp;<span class="signature">PIERRE David</span>,&nbsp;étudiant mémorand à la FAMV/UEH
+        (PDA).
+      </span>
+      <!-- Copie 2 (identique, nécessaire pour une boucle sans coupure) -->
+      <span class="ticker__item" aria-hidden="true">
+        Bienvenue sur le site de&nbsp;<span class="signature">PIERRE David</span>,&nbsp;étudiant mémorand à la FAMV/UEH
+        (PDA).
+      </span>
+    </div>
+  </div>
+
+  <!-- =================================================================
+     B. NAVIGATION
+     ================================================================= -->
+  <header>
+    <nav class="nav" aria-label="Navigation principale">
+      <div class="container nav__inner">
+        <a class="nav__brand" href="#intro">PIERRE <span>David</span></a>
+        <ul class="nav__links">
+          <li><a href="#apropos">À propos</a></li>
+          <li><a href="#medias">Médias</a></li>
+          <li><a href="#documents">Documents</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===============================================================
+       C. SECTION INTRO + PLANCHE CRÈME (animation "SPen")
+       =============================================================== -->
+    <section class="intro" id="intro">
+      <div class="container">
+
+        <p class="kicker reveal">Bienvenue</p>
+
+        <h1 class="intro__title reveal">PIERRE <em>David</em></h1>
+
+        <p class="intro__sub reveal">
+          Étudiant mémorand à la Faculté d'Agronomie et de Médecine Vétérinaire
+          de l'Université d'État d'Haïti — spécialité <strong>Production Animale (PDA)</strong>.
+        </p>
+
+        <!-- ---- La planche crème sur laquelle "écrit" le SPen ---- -->
+        <div class="plank reveal" id="plank">
+          <p class="plank__label">Définition des sigles</p>
+
+          <div class="plank__lines">
+            <!-- Spans vides : le texte est injecté par script.js -->
+            <p class="typed-line"><span class="typed" id="typed-1"></span></p>
+            <p class="typed-line"><span class="typed" id="typed-2"></span></p>
+            <p class="typed-line"><span class="typed" id="typed-3"></span></p>
+          </div>
+        </div>
+        <!-- ---- Fin de la planche crème ---- -->
+
+      </div>
+    </section>
+
+    <!-- ===============================================================
+       D. SECTION "À PROPOS"
+       =============================================================== -->
+    <section class="section" id="apropos">
+      <div class="container">
+
+        <div class="section__head reveal">
+          <p class="kicker">À propos</p>
+          <h2>Qui suis-je&nbsp;?</h2>
+          <p>Un étudiant passionné par les sciences animales, le développement rural et le numérique appliqué à
+            l'agronomie.</p>
+        </div>
+
+        <div class="about">
+
+          <!-- ============================================================
+             ⚠️ À MODIFIER : REMPLACEZ L'IMAGE CI-DESSOUS PAR VOTRE PHOTO
+             ============================================================ -->
+          <figure class="about__photo reveal">
+            <img src="David.jpg" alt="Portrait de PIERRE David, étudiant mémorand à la FAMV/UEH">
+            <figcaption>PIERRE David — étudiant mémorand, FAMV/UEH (PDA)</figcaption>
+          </figure>
+
+          <div class="about__text reveal">
+            <p>
+              Je m'appelle <strong>PIERRE David</strong>, étudiant mémorand à la
+              <strong>Faculté d'Agronomie et de Médecine Vétérinaire de l'Université d'État d'Haïti
+                (FAMV/UEH)</strong>, où je me spécialise en <strong>Production Animale (PDA)</strong>.
+            </p>
+            <p>
+              Mon parcours m'a amené à m'intéresser autant à l'élevage et à la santé animale
+              qu'aux outils numériques qui permettent de mieux organiser, documenter et partager
+              les connaissances du terrain. C'est dans cette logique que j'apprends le
+              développement web (HTML, CSS, JavaScript) afin de créer des supports utiles à la
+              communauté agronomique haïtienne.
+            </p>
+            <p>
+              Je travaille actuellement sur mon <strong>mémoire de fin d'études</strong>, dont les
+              documents et médias seront progressivement publiés sur ce site.
+            </p>
+
+            <ul class="facts">
+              <li>FAMV / UEH</li>
+              <li>Production Animale — PDA</li>
+              <li>Haïti</li>
+              <li>Ouvert aux collaborations</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- ---- Compétences techniques (HTML / CSS / JavaScript) ---- -->
+        <div class="skills">
+          <h3 class="skills__title reveal">Compétences techniques</h3>
+
+          <article class="skill reveal" style="--v:90%">
+            <div class="skill__top"><span>HTML5</span><span>90 %</span></div>
+            <div class="skill__bar"><i></i></div>
+          </article>
+
+          <article class="skill reveal" style="--v:82%">
+            <div class="skill__top"><span>CSS3</span><span>82 %</span></div>
+            <div class="skill__bar"><i></i></div>
+          </article>
+
+          <article class="skill reveal" style="--v:70%">
+            <div class="skill__top"><span>JavaScript</span><span>70 %</span></div>
+            <div class="skill__bar"><i></i></div>
+          </article>
+        </div>
+
+        <!-- Badges complémentaires — libres à personnaliser -->
+        <div class="badges reveal">
+          <span>Responsive Design</span>
+          <span>Git / GitHub</span>
+          <span>Bureautique</span>
+          <span>Rédaction scientifique</span>
+          <span>Zootechnie</span>
+          <span>Santé animale</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===============================================================
+       E. SECTION MÉDIAS (audios, photos, vidéos)
+       =============================================================== -->
+    <section class="section" id="medias">
+      <div class="container">
+
+        <div class="section__head reveal">
+          <p class="kicker">Médias</p>
+          <h2>Audios, photos &amp; vidéos</h2>
+          <p>Une galerie vivante de mes travaux de terrain, présentations et documents audiovisuels.</p>
+        </div>
+
+        <div class="media-grid">
+
+          <!-- ============================================================
+             ⚠️ À MODIFIER — AUDIO
+             ============================================================ -->
+          <article class="card reveal">
+            <h3>Audio</h3>
+            <audio controls preload="none">
+              <source src="medias/mon-audio.mp3" type="audio/mpeg">
+              Votre navigateur ne prend pas en charge la lecture audio.
+            </audio>
+            <p class="hint">Emplacement réservé à un enregistrement (ex. présentation orale, interview terrain).</p>
+          </article>
+
+          <!-- ============================================================
+             ⚠️ À MODIFIER — VIDÉO
+             ============================================================ -->
+          <article class="card reveal">
+            <h3>Vidéo</h3>
+            <video controls preload="metadata" poster="poster-montana.jpg">
+              <source src="Montana.mp4" type="video/mp4">
+              Votre navigateur ne prend pas en charge la lecture vidéo.
+            </video>
+            <p class="hint">Une vidéo avec Mme Lewinn</p>
+          </article>
+
+          <!-- ============================================================
+             ⚠️ À MODIFIER — PHOTO PRINCIPALE / COUVERTURE
+             ============================================================ -->
+          <article class="card reveal">
+            <h3>Photo à la une</h3>
+            <img src="photo-courte.jpg" alt="Photo à la une du site de PIERRE David"
+              style="border-radius:14px; aspect-ratio:16/9; object-fit:cover;">
+            <p class="hint">Daveratel</p>
+          </article>
+
+        </div>
+
+        <!-- ---- GALERIE PHOTOS ---------------------------------------- -->
+        <div class="gallery reveal">
+          <figure>
+            <img src="photo-moyen.jpg" alt="Photo de terrain">
+          </figure>
+          <figure>
+            <img src="my-miel.jpg" alt="My miel à Frangipane">
+          </figure>
+          <figure>
+            <img src="paul-et-moi.jpg" alt="Paul et moi"
+              style="border-radius:12px; aspect-ratio:16/9; object-fit:cover;">
+            <figcaption class="hint">Paul et moi</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===============================================================
+       F. SECTION DOCUMENTS — MÉMOIRE DE FIN D'ÉTUDES
+       =============================================================== -->
+    <section class="section" id="documents">
+      <div class="container">
+
+        <div class="section__head reveal">
+          <p class="kicker">Documents</p>
+          <h2>Mémoire &amp; travaux académiques</h2>
+          <p>Mes productions écrites, en cours de rédaction ou déjà disponibles.</p>
+        </div>
+
+        <!-- ==============================================================
+           ⚠️ À MODIFIER — MÉMOIRE DE FIN D'ÉTUDES
+           ============================================================== -->
+        <div class="thesis reveal">
+          <span class="thesis__badge">En cours de rédaction</span>
+
+          <h3>Mémoire de fin d'études — Production Animale (PDA)</h3>
+
+          <p>
+            Sujet : <strong><q>Caractérisation des pratiques alimentaires des animaux d'élevage familial en milieu
+                maraîcher : utilisation des résidus de cultures maraîchères à Grand-Fond (Kenscoff)</q></strong>. Ce
+            travail de fin d'études porte sur la production animale en Haïti et sera mis en ligne après soutenance. Le
+            document PDF sera téléchargeable ici dès son dépôt.
+          </p>
+
+          <div class="thesis__actions">
+            <a class="btn btn--primary" href="documents/memoire-fin-etudes.pdf" target="_blank" rel="noopener">
+              Prévisualiser le PDF
+            </a>
+
+            <a class="btn btn--ghost" href="documents/memoire-fin-etudes.pdf" download>
+              Télécharger
+            </a>
+          </div>
+        </div>
+
+        <!-- ---- Autres documents académiques --------------------------- -->
+        <div class="doc-list reveal">
+          <a href="documents/rapport-de-stage.pdf" target="_blank" rel="noopener">
+            <span class="ico">📄</span>
+            <span>
+              Rapport de stage
+              <span>PDF — à venir</span>
+            </span>
+          </a>
+
+          <a href="documents/fiche-technique.pdf" target="_blank" rel="noopener">
+            <span class="ico">📑</span>
+            <span>
+              Fiche technique
+              <span>PDF — à venir</span>
+            </span>
+          </a>
+
+          <a href="documents/cv-pierre-david.pdf" target="_blank" rel="noopener">
+            <span class="ico">🗂️</span>
+            <span>
+              Curriculum vitæ
+              <span>PDF — à venir</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===============================================================
+       G. SECTION CONTACT
+       =============================================================== -->
+    <section class="section" id="contact">
+      <div class="container">
+
+        <div class="section__head reveal">
+          <p class="kicker">Contact</p>
+          <h2>Restons en contact</h2>
+          <p>Une question, une collaboration ou une demande d'information ? Écrivez-moi.</p>
+        </div>
+
+        <div class="contact">
+
+          <!-- ---- Coordonnées ---------------------------------------- -->
+          <ul class="contact-list reveal">
+            <li>
+              <span class="label">E-mail institutionnel</span>
+              <a href="mailto:david.pierre004@student.ueh.edu.ht">david.pierre004@student.ueh.edu.ht</a>
+            </li>
+
+            <li>
+              <span class="label">E-mail personnel</span>
+              <a href="mailto:pierdavid285@gmail.com">pierdavid285@gmail.com</a>
+            </li>
+
+            <li>
+              <span class="label">Téléphone</span>
+              <a href="tel:+50955099765">5509-9765</a>
+            </li>
+
+            <li>
+              <span class="label">Second téléphone</span>
+              <a href="tel:+50946632188">4663-2188</a>
+            </li>
+          </ul>
+
+          <!-- ---- Formulaire de contact ------------------------------- -->
+          <form class="form reveal" id="contact-form" novalidate>
+            <div class="field">
+              <label for="nom">Nom complet</label>
+              <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+            </div>
+
+            <div class="field">
+              <label for="email">Votre e-mail</label>
+              <input type="email" id="email" name="email" placeholder="vous@exemple.com" required>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Votre message…" required></textarea>
+            </div>
+
+            <button class="btn btn--primary" type="submit">Envoyer le message</button>
+            <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================
+     H. PIED DE PAGE
+     ================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        © <span id="year">2026</span> <strong>PIERRE David</strong><br>
+        Étudiant mémorand · FAMV/UEH · Production Animale (PDA)
+      </p>
+    </div>
+  </footer>
+
+  <!-- =================================================================
+     I. SCRIPT
+     ================================================================= -->
+  <script src="script.js" defer></script>
+
+</body>
+
+</html>
